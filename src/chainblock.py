@@ -25,8 +25,12 @@ Hash: {self.hash_}\n---EndOfBlock---'
 class Chain():
 
     def __init__(self):
-        pass
-        # TODO Create Genesis block and return a block chain.
+        genesis_block = Block('Genesis Block', '')
+        self.chain = list()
+        self.chain.append(genesis_block)
 
-    # TODO define add function.
+    def add_block(self, data: str):
+        block = Block(data, self.chain[-1].hash_)
+        self.chain.append(block)
+
     # TODO set difficulty level.
