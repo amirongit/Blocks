@@ -29,3 +29,4 @@ class Chain():
         # TODO Create Genesis block and return a block chain.
 
     # TODO define add function.
+    # TODO set difficulty level.
