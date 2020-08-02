@@ -14,6 +14,9 @@ class Block():
         hasher.update(bytes(self.data + self.time_stamp, 'utf-8'))
         return hasher.hexdigest()
 
+    def is_valid(self):
+        return self.get_hash() == self.hash_
+
     def __str__(self):
         return f'Data: {self.data}, \nTimeStamp: {self.time_stamp}, \n\
 Hash: {self.hash_}\n---EndOfBlock---'
