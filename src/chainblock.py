@@ -44,7 +44,7 @@ class Chain():
             if self.chain.index(block) == 0:
                 continue
             if block.get_hash(self.chain[
-                    self.chain.index(block) - 1].hash_) == block.get_hash():
+                    self.chain.index(block) - 1].hash_) == block.hash_:
                 pass
             else:
                 return False
