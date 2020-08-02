@@ -20,3 +20,12 @@ class Block():
     def __str__(self):
         return f'Data: {self.data}, \nTimeStamp: {self.time_stamp}, \n\
 Hash: {self.hash_}\n---EndOfBlock---'
+
+
+class Chain():
+
+    def __init__(self):
+        pass
+        # TODO Create Genesis block and return a block chain.
+
+    # TODO define add function.
