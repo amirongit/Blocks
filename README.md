@@ -1,3 +1,3 @@
 # Blocks
 
-experimental implementation of block chain, using python.
+experimental implementation of blockchain, using python.
