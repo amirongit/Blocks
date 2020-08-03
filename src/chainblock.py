@@ -58,5 +58,3 @@ class Chain():
 
     def __str__(self):
         return '\n\n'.join([str(block) for block in self.chain])
-
-    # TODO set difficulty level.
