@@ -21,7 +21,7 @@ class Block():
             if test_func(hasher.hexdigest()):
                 return hasher.hexdigest(), str(salt)
 
-    def is_valid(self, prev_hash, test_func):
+    def is_valid(self, test_func, prev_hash):
         hasher = sha256()
         hasher.update(bytes(self.data + self.time_stamp +
                             prev_hash + self.salt, 'utf-8'))
@@ -36,23 +36,23 @@ Hash: {self.hash_}, \nPreviousBlockHash: \
 
 class Chain():
 
-    def __init__(self):
-        genesis_block = Block('Genesis Block', '')
+    def __init__(self, condition):
+        self.condition = condition
+        genesis_block = Block('Genesis Block', '', condition)
         self.chain = list()
         self.chain.append(genesis_block)
 
     def add_block(self, data: str):
-        block = Block(data, self.chain[-1].hash_)
+        block = Block(data, self.chain[-1].hash_, self.condition)
         self.chain.append(block)
 
     def is_valid(self):
         for block in self.chain:
             if self.chain.index(block) == 0:
-                continue
-            if block.get_hash(self.chain[
-                    self.chain.index(block) - 1].hash_) == block.hash_:
-                pass
-            else:
+                if block.get_hash(self.condition, '')[0] != block.hash_:
+                    return False
+            elif block.get_hash(self.condition, self.chain[
+                    self.chain.index(block) - 1].hash_)[0] != block.hash_:
                 return False
         return True
 
