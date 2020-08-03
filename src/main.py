@@ -1,9 +1,21 @@
-from chainblock import Chain
+from chainblock import Chain, Block
 
-my_chain = Chain()
-my_chain.add_block('This is a new block')
-my_chain.add_block('And this is another block')
-print(f'This is my chain:\n{my_chain}')
-print(f'Is it a valid chain?! {my_chain.is_valid()}')
-my_chain.chain[2].data = 'Changed data'
-print(f'Is it still valid?! {my_chain.is_valid()}')
+
+def difficulty_test(hash_):
+    return hash_[:2] == 2 * '0'
+
+
+my_block = Block('Genesis', '', difficulty_test)
+print(my_block, '\n')
+print('Testing the block validation: ', my_block.is_valid(difficulty_test, ''))
+print()
+my_block.data = 'Changed'
+print('Testing after data changed: ', my_block.is_valid(difficulty_test, ''),
+      '\n')
+
+my_chain = Chain(lambda hash_: hash_[:2] == 2 * '0')
+my_chain.add_block('Hi')
+print(my_chain, '\n')
+print('Testing validation of chain: ', my_chain.is_valid(), '\n')
+my_chain.chain[0].data = 'CHANGED'
+print('Testing after data changed: ', my_chain.is_valid())
