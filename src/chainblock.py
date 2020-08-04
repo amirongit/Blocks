@@ -46,11 +46,7 @@ class Chain():
 
     def is_valid(self):
         for block in self.chain:
-            if self.chain.index(block) == 0:
-                if block.get_hash(self.condition, '')[0] != block.hash_:
-                    return False
-            elif block.get_hash(self.condition, self.chain[
-                    self.chain.index(block) - 1].hash_)[0] != block.hash_:
+            if block.is_valid() is not True:
                 return False
         return True
 
