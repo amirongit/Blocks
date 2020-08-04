@@ -51,4 +51,6 @@ class Chain():
         return True
 
     def __str__(self):
-        return '\n\n'.join([str(block) for block in self.chain])
+        return ('---ChainStart---' +
+                '\n\n'.join([str(block) for block in self.chain]) +
+                '---ChainEnd---')
