@@ -25,7 +25,7 @@ class Block():
         hasher = sha256()
         hasher.update(bytes(self.data + self.time_stamp +
                             prev_hash + self.salt, 'utf-8'))
-        return self.get_hash(test_func)[0] == self.hash_
+        return hasher.hexdigest() == self.hash_
 
     def __str__(self):
         return f'---BlockStart---\n\
