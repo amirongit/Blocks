@@ -11,20 +11,18 @@ class Block():
         self.prev_block_hash = prev_block_hash
         self.hash_, self.salt = self.get_hash(test_func)
 
-    def get_hash(self, test_func, prev_hash=None):
-        if not prev_hash:
-            prev_hash = self.prev_block_hash
-        hasher = sha256()
+    def get_hash(self, test_func):
         for salt in count():
+            hasher = sha256()
             hasher.update(bytes(self.data + self.time_stamp +
-                                prev_hash + str(salt), 'utf-8'))
+                          self.prev_block_hash + str(salt), 'utf-8'))
             if test_func(hasher.hexdigest()):
                 return hasher.hexdigest(), str(salt)
 
-    def is_valid(self, test_func, prev_hash):
+    def is_valid(self):
         hasher = sha256()
         hasher.update(bytes(self.data + self.time_stamp +
-                            prev_hash + self.salt, 'utf-8'))
+                      self.prev_block_hash + self.salt, 'utf-8'))
         return hasher.hexdigest() == self.hash_
 
     def __str__(self):
